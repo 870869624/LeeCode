@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -15,11 +13,6 @@ var a3 = &TreeNode{Val: 3, Left: nil, Right: nil}
 var b1 = &TreeNode{Val: 1, Left: b2, Right: b3}
 var b2 = &TreeNode{Val: 2, Left: nil, Right: nil}
 var b3 = &TreeNode{Val: 3, Left: nil, Right: nil}
-
-func main() {
-	result := isSameTree(a1, b1)
-	fmt.Println(result)
-}
 
 func isSameTree(p *TreeNode, q *TreeNode) bool {
 	if p == nil && q == nil {

@@ -1,6 +1,6 @@
 # [分享｜如何科学刷题？](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/)
 
-![1742267667426](image/README/1742267667426.png)
+![1742267667426](https://pic.leetcode.cn/1720231746-FwkEem-%E5%BF%83%E6%B5%81.jpg)
 
 > 合理运用心流通道，科学刷题，快乐刷题！
 
@@ -64,7 +64,7 @@
 
 ## 训练方法 C
 
-![1742268763668](image/README/1742268763668.png)
+![1742268763668](https://pic.leetcode.cn/1740366413-ciMsTC-%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E5%88%B7%E9%A2%98-2.png)
 
 如果时间很少，可以突击训练 [HOT 100](https://leetcode.cn/studyplan/top-100-liked/)，这些都是经典面试题。
 

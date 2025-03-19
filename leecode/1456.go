@@ -9,6 +9,7 @@ func maxVowels(s string, k int) (ans int) {
 		if in == 'a' || in == 'e' || in == 'i' || in == 'o' || in == 'u' {
 			vowel++
 		}
+
 		fmt.Println("走到这里", i)
 		if i < k-1 {
 			continue

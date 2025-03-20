@@ -15,8 +15,8 @@ func maximumSubarraySum(nums []int, k int) int64 {
 			maxSum = sum
 		}
 
-		if len(num) >= k {
-			maxSum = 0
+		if len(num) < k {
+			maxSum = max(maxSum, 0)
 		} else {
 			maxSum = max(maxSum, sum)
 		}

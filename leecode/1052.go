@@ -1,8 +1,5 @@
 package main
 
-func main() {
-	maxSatisfied([]int{1, 0, 1, 2, 1, 1, 7, 5}, []int{0, 1, 0, 1, 0, 1, 0, 1}, 3)
-}
 func maxSatisfied(customers []int, grumpy []int, minutes int) int {
 	var sum int
 	len := len(customers)

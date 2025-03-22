@@ -1,10 +1,5 @@
 package main
 
-import "fmt"
-
-func main() {
-	groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"})
-}
 func groupAnagrams(strs []string) [][]string {
 	var bucket = make(map[[26]int][]string)
 
@@ -18,10 +13,9 @@ func groupAnagrams(strs []string) [][]string {
 
 	var ret = make([][]string, 0, len(bucket))
 
-	fmt.Println(bucket, "==========")
 	for _, v := range bucket {
 		ret = append(ret, v)
-		fmt.Println(v, "-----", ret)
 	}
-	return
+
+	return ret
 }

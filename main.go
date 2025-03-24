@@ -1,27 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"})
+	lengthOfLongestSubstring("abba")
 }
-func groupAnagrams(strs []string) [][]string {
-	var bucket = make(map[[26]int][]string)
+func lengthOfLongestSubstring(s string) int {
+	str := strings.Split(s, "")
+	var len1 int
+	var maxLen int
+	m := make([]string, 0)
+	var left int
+	var right int
 
-	for _, str := range strs {
-		var count [26]int
-		for _, c := range str {
-			count[c-'a']++
+	for i := range str {
+		for k, v := range m {
+			if v == str[i] {
+				m = m[k+1:]
+				break
+			}
 		}
-		bucket[count] = append(bucket[count], str)
-	}
 
-	var ret = make([][]string, 0, len(bucket))
+		m = append(m, str[i])
+		len1 = len(m)
 
-	fmt.Println(bucket, "==========")
-	for _, v := range bucket {
-		ret = append(ret, v)
-		fmt.Println(v, "-----", ret)
+		if i == 0 {
+			maxLen = len1
+		} else {
+			maxLen = max(maxLen, len1)
+		}
+
+		fmt.Println(maxLen, len1, m, left, right)
 	}
-	return
+	return maxLen
 }

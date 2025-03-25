@@ -2,38 +2,49 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"sync"
+	"time"
 )
 
 func main() {
-	lengthOfLongestSubstring("abba")
-}
-func lengthOfLongestSubstring(s string) int {
-	str := strings.Split(s, "")
-	var len1 int
-	var maxLen int
-	m := make([]string, 0)
-	var left int
-	var right int
 
-	for i := range str {
-		for k, v := range m {
-			if v == str[i] {
-				m = m[k+1:]
-				break
-			}
+	var wg sync.WaitGroup
+	ch1 := make(chan struct{})
+	ch2 := make(chan struct{})
+
+	// 打印1的goroutine
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 20; i++ {
+			time.Sleep(1 * time.Second)
+			fmt.Print(1)
+			ch1 <- struct{}{}
 		}
+		close(ch1)
+	}()
 
-		m = append(m, str[i])
-		len1 = len(m)
-
-		if i == 0 {
-			maxLen = len1
-		} else {
-			maxLen = max(maxLen, len1)
+	// 打印2的goroutine
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 20; i++ {
+			<-ch1
+			fmt.Print(2)
+			ch2 <- struct{}{}
 		}
+		close(ch2)
+	}()
 
-		fmt.Println(maxLen, len1, m, left, right)
-	}
-	return maxLen
+	// 打印3的goroutine
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 20; i++ {
+			<-ch2
+			fmt.Println(3)
+		}
+	}()
+
+	wg.Wait()
 }

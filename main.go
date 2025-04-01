@@ -1,50 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
+import "fmt"
 
 func main() {
+	maxArea([]int{1, 0, 0, 0, 0, 0, 0, 2, 2})
+}
 
-	var wg sync.WaitGroup
-	ch1 := make(chan struct{})
-	ch2 := make(chan struct{})
+func maxArea(height []int) int {
 
-	// 打印1的goroutine
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for i := 0; i < 20; i++ {
-			time.Sleep(1 * time.Second)
-			fmt.Print(1)
-			ch1 <- struct{}{}
+	right := len(height) - 1
+	left := 0
+
+	var maxArea int
+
+	for left < right {
+
+		if height[left] < height[right] {
+			maxArea = max(maxArea, height[left]*(right-left))
+			left++
+		} else {
+			maxArea = max(maxArea, height[right]*(right-left))
+			right--
 		}
-		close(ch1)
-	}()
+	}
 
-	// 打印2的goroutine
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for i := 0; i < 20; i++ {
-			<-ch1
-			fmt.Print(2)
-			ch2 <- struct{}{}
-		}
-		close(ch2)
-	}()
-
-	// 打印3的goroutine
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for i := 0; i < 20; i++ {
-			<-ch2
-			fmt.Println(3)
-		}
-	}()
-
-	wg.Wait()
+	fmt.Println(maxArea)
+	return maxArea
 }

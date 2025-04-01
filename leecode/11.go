@@ -1,16 +1,24 @@
 package main
 
+import "fmt"
+
 func maxArea(height []int) int {
+	right := len(height) - 1
+	left := 0
 
 	var maxArea int
-	var left int
-	for i := range height {
-		if maxArea > height[i] {
-			left = left
-			maxArea = maxArea
+
+	for left < right {
+
+		if height[left] < height[right] {
+			maxArea = max(maxArea, height[left]*(right-left))
+			left++
 		} else {
-			left = i
-			maxArea = height[i]
+			maxArea = max(maxArea, height[right]*(right-left))
+			right--
 		}
 	}
+
+	fmt.Println(maxArea)
+	return maxArea
 }

@@ -1,11 +1,5 @@
 package main
 
-import "fmt"
-
-func main() {
-	trap([]int{4, 2, 0, 3, 2, 5})
-}
-
 func trap(height []int) int {
 
 	sumWhite := 0
@@ -20,27 +14,23 @@ func trap(height []int) int {
 		return 0
 	}
 
+	left := 0
+	right := n - 1
 	h := 1
 
 	sumAll := 0
-	left := 0
-	right := n - 1
-
 	for h <= max1 {
-
-		for height[left] < h {
+		for left <= right && height[left] < h {
 			left++
 		}
-		for height[right] < h {
+		for left <= right && height[right] < h {
 			right--
 		}
 		if left == right {
-			sumAll += 1
+			sumAll += h
 		} else {
-			sumAll += right - left + 1
+			sumAll += (right - left) * h
 		}
-
-		fmt.Println(sumAll, h, left, right)
 		h++
 	}
 

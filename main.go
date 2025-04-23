@@ -3,46 +3,30 @@ package main
 import "fmt"
 
 func main() {
-	trap([]int{4, 2, 0, 3, 2, 5})
+	fmt.Println(generateParenthesis(2))
 }
 
-func trap(height []int) int {
+func generateParenthesis(n int) []string {
+	//每添加一个左括号，加1计数需要的右括号
 
-	sumWhite := 0
-	max1 := 0
-	for i := 0; i < len(height); i++ {
-		max1 = max(max1, height[i])
-		sumWhite += height[i]
-	}
+	res := []string{}
 
-	n := len(height)
-	if n == 0 {
-		return 0
-	}
-
-	h := 1
-
-	sumAll := 0
-	left := 0
-	right := n - 1
-
-	for h <= max1 {
-
-		for height[left] < h {
-			left++
-		}
-		for height[right] < h {
-			right--
-		}
-		if left == right {
-			sumAll += 1
-		} else {
-			sumAll += right - left + 1
+	var dfs func(left, right int, str string)
+	dfs = func(left, right int, str string) {
+		if right > 0 {
+			fmt.Println(left, right, "-------")
+			dfs(left, right-1, str+")")
 		}
 
-		fmt.Println(sumAll, h, left, right)
-		h++
-	}
+		if left > 0 {
+			fmt.Println(left, right, "+++++++")
+			dfs(left-1, right+1, str+"(")
+		}
 
-	return sumAll - sumWhite
+		if left == 0 && right == 0 {
+			res = append(res, str)
+		}
+	}
+	dfs(n, 0, "")
+	return res
 }
